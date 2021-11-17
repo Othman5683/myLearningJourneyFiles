@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+<body>
+    <div id="main-container">
+        <fieldset style="width: 50%;">
+            <legend>Personal Information</legend> 
+            <form id="frm" action="" method="POST">
+                First_Name: <input id="fn" type="text" name="fname" placeholder="FirstName"><br><br>
+                Other_Name: <input id="on" type="text" name="oname" placeholder="OtherName"><br><br>
+                Sir_Name: <input id="sr" type="text" name="sname" placeholder="SirName"><br><br>
+                Age: <input id="ag" type="number" name="num" placeholder="Age">
+                <input type="submit" value="Submit">
+            </form>
+        </fieldset>
+    </div>
+    <br>
+    <button id="getHello">Get Hello Message</button>
+    <button id="getPost">Get Posts</button>
+    <div id="output"></div>    
+<script>
+        document.getElementById('getHello').addEventListener('click', getHello);
+        function getHello() {
+            fetch('http://localhost:6060/getHello')
+            .then((response) => response.json())
+            .then((data) => {
+                document.getElementById('output').innerHTML = data;
+            })
+            .catch((err) => console.log(err))
+        };
+
+        document.getElementById('frm').addEventListener('submit', addPost);
+        function addPost(e) {
+                e.preventDefault();
+                let firstName = document.getElementById('fn').value;
+                let otherName = document.getElementById('on').value;
+                let sirName = document.getElementById('sr').value;
+                let age = document.getElementById('ag').value;
+                
+                fetch('http://localhost:6060/addStudent', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*', 
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstName: firstName,
+                        otherName: otherName,
+                        sirName: sirName,
+                        age: age
+                    })
+                })
+                .then((response) => response.json())
+                .then((data) => console.log(data))
+                .catch((err) => console.log(err))
+        };
+
+        document.getElementById('getPost').addEventListener('click,', getPost());
+        function getPost() {
+            fetch('http://localhost:6060/getStudents')
+            .theen((response) => response.json())
+            .then((data) => {
+                document.getElementById('output').innerHTML = data;
+            })
+            .catch((erro) => console.log(err))
+        };
+</script>    
+</body>
+</html>
