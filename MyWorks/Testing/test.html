@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello  World,.!</h1>
+    <div id="form-Container">
+        <fieldset style="width: 50%;">
+            <legend>Personal Information</legend>
+            <form id="form" method="POST">
+                <label for="">First_Name:</label>
+                <div id="div-fn">
+                    <input id="fname" type="text" name="fn" placeholder="FirstName" required><br><br>
+                </div>
+                <label for="">Other_Name:</label>
+                <div id="div-on">
+                    <input id="oname" type="text" name="on" placeholder="OtherName"><br><br>
+                </div>
+                <label for="">Sir_Name:</label>
+                <div id="div-sr">
+                    <input id="sname" type="text" name="sr" placeho9EA04D9Alder="SirName" required> <br><br>
+                </div>
+                <label for="">Age:</label>
+                <div id="div-num">
+                    <input id="ag" type="numbeer" name="num" placeholder="Age" min="5" max="40" required> <br><br>
+                </div> 
+                <input id="sbm" type="submit" value="Submit">
+
+            </form>
+        </fieldset>
+    </div>
+    <br>
+    <button id="getList">Get List</button>
+    <div id="output"></div>
+<script>
+    document.getElementById('getList').addEventListener('click', getList);
+    document.getElementById('form').addEventListener('submit', addPosts);
+
+    function addPosts(e) {
+        e.preventDefault();
+        let firstName = document.getElementById('fname').value;
+        let otherName = document.getElementById('oname').value;
+        let sirName = document.getElementById('sname').value;
+        let age = document.getElementById('ag').value;
+
+        fetch('http://localhost:5555/api/students', {
+            method: 'POST',
+            body: JSON.stringify({
+                First_Name: firstName,
+                Other_Name: otherName,
+                Sir_Name: sirName,
+                age: age
+            }),
+            headers: {
+                'Content-type': 'application/json: charset=UTF-8'
+            }
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+    }
+
+
+
+
+
+
+
+    // function getList() {
+    //     fetch('http://localhost:5555/api/list')
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         let results = document.getElementById('getList');
+    //         results.innerHTML = `
+    //         <p>${data.First_Name}</p>
+    //         <p>${data.Other_Name}</p>
+    //         <p>${data.Sir_Name}</p>
+    //         <p>${data.Age}</p>
+    //         `;
+    //     })
+    // };
+</script>
+</body>
+</html>
