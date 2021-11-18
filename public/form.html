@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    <h2>Registration Form</h2>
+<hr>
+<div>
+    <fieldset style="width: 50%;">
+        <legend>Personal Information</legend>
+            <form onsubmit="return validate()" action="/member" method="POST">
+                <label for="fn">First_Name:</label>
+                <input id="inp1" type="text" name="fname" placeholder="FirstName">
+                <label id="lbFn" style="color: red; visibility: hidden;">Invalid FirstName</label>
+                <br><br>
+
+                <label for="on">Other_Name:</label>
+                <input id="inp2" type="text" name="oname" placeholder="OtherName">
+                <label id="lbOn" style="color: red; visibility: hidden;">Invalid OtherName</label>
+                <br><br>
+
+                <label for="ss">Sir_Name:</label>
+                <input id="inp3" type="text" name="sname" placeholder="SirName" required>
+                <label id="lbSn" style="color: red; visibility: hidden;">Invalid SirName</label>
+                <br><br>
+
+                <label for="ag">Age:</label>
+                <input id="inp4" type="number" name="num" placeholder="Age" min="5" max="40" required>
+                <label id="lbFn" style="color: red; visibility: hidden;">Invalid Age</label>
+
+                <label for="gd">Gender</label>
+                <select name="selectbox" id="selectG">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button>Submit</button> 
+            </form>
+    </fieldset>
+</div>
+
+<script>
+
+function validate() {
+
+        let fn = document.getElementById('inp1');
+        let on = document.getElementById('inp2');
+        let sr = document.getElementById('inp3');
+        let g = document.getElementById('inp4');
+
+        if(fn.value.trim() == '') {
+            fn.style.border = 'solid 2px red';
+            alert('Sorry, an empty field does not allowed');
+            document.getElementById('lbFn').style.visibility = 'visible';
+            return false;
+        } else if(fn.value.trim().length < 3) {
+            fn.style.border = 'solid 2px red';
+            alert('Sorry, FirstName should be at least three caracters and above');
+            document.getElementById('lbFn').style.visibility = 'visible';
+            return false
+        } else if(sr.value.trim() == '') {
+            sr.style.border = 'solid 2px red';
+            alert('Sorry, an empty field does not allowed');
+            document.getElementById('lbSn').style.visibility = 'visible';
+            return false;
+        } else if(sr.value.trim().length < 3) {
+            sr.style.border = 'solid 2px red';
+            alert('Sorry, SirName should be at least three caracters and above');
+            document.getElementById('lbSn').style.visibility = 'visible';
+            return false;
+        } else {
+            true;
+        };
+
+        const regx = /[A-z]/;
+
+        if(regx.test(fn.value)) {
+            return true;
+        } else {
+            fn.style.border = 'solid 2px red';
+            alert('Sorry, an ipunt field should contain a leter');
+            document.getElementById('lbFn').style.visibility = 'visible';
+            return false;
+        };
+
+    };
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
